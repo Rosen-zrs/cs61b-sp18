@@ -34,6 +34,7 @@ public class ArrayDeque<T>{
     public void addFirst(T item){
         sentinel[front] = item;
         front = (sentinel.length + front - 1) % sentinel.length;
+        size += 1;
         if(size == sentinel.length - 3)
         {
             resize(2 * sentinel.length);
@@ -43,6 +44,7 @@ public class ArrayDeque<T>{
     public void addLast(T item){
         sentinel[back] = item;
         back = back + 1;
+        size += 1;
         if(size == sentinel.length - 3){
             resize(2 * sentinel.length);
         }
@@ -70,6 +72,7 @@ public class ArrayDeque<T>{
         T b = sentinel[front];
         sentinel[front] = null;
         front += 1;
+        size -= 1;
         return b;
     }
 
@@ -78,6 +81,7 @@ public class ArrayDeque<T>{
         T b = sentinel[back];
         sentinel[back] = null;
         back -= 1;
+        size -= 1;
         return b;
     }
 
