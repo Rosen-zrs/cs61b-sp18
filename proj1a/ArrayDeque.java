@@ -12,8 +12,8 @@ public class ArrayDeque<T>{
     }
 
     public ArrayDeque(ArrayDeque other){
-        sentinel = (T[]) new Object[other.length];
-        System.arraycopy(sentinel, 0, b, 0, other.length);
+        sentinel = (T[]) new Object[other.sentinel.length];
+        System.arraycopy(sentinel, 0, other.sentinel, 0, other.sentinel.length);
         front = other.front;
         back = other.back;
     }
