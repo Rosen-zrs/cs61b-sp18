@@ -16,7 +16,6 @@ public class LinkedListDeque<T>{
     private Deque sentinel;
     private int size;
 
-    //创建空双向队列
     public LinkedListDeque(){
         sentinel = new Deque(null,null,null);
         sentinel.front = sentinel;
@@ -24,7 +23,7 @@ public class LinkedListDeque<T>{
         size = 0;
     }
 
-    //创建双向队列副本
+
     public LinkedListDeque(LinkedListDeque other){
         sentinel = new Deque(null,null,null);
         sentinel.front = sentinel;
@@ -36,31 +35,31 @@ public class LinkedListDeque<T>{
         }
     }
 
-    //在双头队列前面添加元素
+
     public void addFirst(T item){
         sentinel.next = new Deque(item,sentinel,sentinel.next);
         sentinel.next.next.front = sentinel.next;
         size += 1;
     }
 
-    //在双头队列后面添加元素
+
     public void addLast(T item){
         sentinel.front = new Deque(item, sentinel.front, sentinel);
         sentinel.front.front.next = sentinel.front;
         size += 1;
     }
 
-    //判断双头队列是否为空
+
     public boolean isEmpty(){
         return (size == 0);
     }
 
-    //返回双头队列的大小
+
     public int size(){
         return size;
     }
 
-    //打印双头队列
+
     public void printDeque(){
         Deque d = sentinel;
         while(d.next != sentinel){
@@ -71,7 +70,7 @@ public class LinkedListDeque<T>{
         System.out.print("\n");
     }
 
-    //删除双头队列的头元素
+
     public T removeFirst(){
         if(size == 0) return null;
         Deque d = sentinel.next;
@@ -80,7 +79,7 @@ public class LinkedListDeque<T>{
         return d.item;
     }
 
-    //删除双头队列的尾元素
+
     public T removeLast(){
         if(size == 0) return null;
         Deque d = sentinel.front;
@@ -89,7 +88,7 @@ public class LinkedListDeque<T>{
         return d.item;
     }
 
-    //通过循环根据索引获取双头队列的对应元素
+    
     public T get(int index){
         if(size <= index) return null;
         Deque d = sentinel;
@@ -102,7 +101,7 @@ public class LinkedListDeque<T>{
         }
     }
 
-    //通过递归根据索引获取双头队列的对应元素
+
     public T getRecursive(int index){
         if(size <= index) return null;
         Deque d = Recursive(sentinel, index);
