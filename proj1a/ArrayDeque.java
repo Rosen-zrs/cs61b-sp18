@@ -22,24 +22,28 @@ public class ArrayDeque<T> {
         T[] b = (T[]) new Object[x];
         if (x > sentinel.length) {
             if (front < back) {        
-                System.arraycopy(sentinel,0,b,0,size);
+                System.arraycopy(sentinel, front, b, 0, size);
+                front = 0;
+                back = size - 1;
                 sentinel = b;
             }
             else {
-                System.arraycopy(sentinel,front,b,front + x/2,sentinel.length - front);
-                System.arraycopy(sentinel,0,b,0,back + 1);
+                System.arraycopy(sentinel, front, b, front + x/2, sentinel.length - front);
+                System.arraycopy(sentinel, 0, b, 0, back + 1);
                 front += x /2;
                 sentinel = b;
             }
         }
         else {
             if (front < back) {        
-                System.arraycopy(sentinel,0,b,0,size);
+                System.arraycopy(sentinel, front, b, 0, size);
+                front = 0;
+                back = size - 1;
                 sentinel = b;
             }
             else {
-                System.arraycopy(sentinel,front,b,front - x,sentinel.length - front);
-                System.arraycopy(sentinel,0,b,0,x/2);
+                System.arraycopy(sentinel, front, b, front - x, sentinel.length - front);
+                System.arraycopy(sentinel, 0, b, 0, back + 1);
                 front -= x;
                 sentinel = b;
             }
@@ -75,21 +79,30 @@ public class ArrayDeque<T> {
     public boolean isEmpty() {
         return (size == 0);
     }
-
+    
     public int size() {
         return size;
     }
 
     public void printDeque() {
+        if (size == 0) {
+            return;
+        }
         int a = front;
         if (front > back) {
             for (int i = 0; i < sentinel.length - front; i++) {
                 System.out.print(sentinel[a++] + " ");
             }
+            for (int i = 0; i < back + 1; i++) {
+                System.out.print(sentinel[i] + " ");
+            }
         }
-        for (int i = 0; i < back + 1; i++) {
-            System.out.print(sentinel[i] + " ");
+        else {
+            for (int i = front; i < back + 1; i++) {
+                System.out.print(sentinel[i] + " ");
+            }
         }
+        
         System.out.print('\n');
     }
 
@@ -101,7 +114,7 @@ public class ArrayDeque<T> {
         sentinel[front] = null;
         front = (front + 1) % sentinel.length;
         size -= 1;
-        if (size == sentinel.length/4 && sentinel.length >= 16) {
+        if (size == sentinel.length / 4 && sentinel.length >= 16) {
             resize(sentinel.length / 2);
         }
         return b;
@@ -115,7 +128,7 @@ public class ArrayDeque<T> {
         sentinel[back] = null;
         back -= 1;
         size -= 1;
-        if (size == sentinel.length/4 && sentinel.length >= 16) {
+        if (size == sentinel.length / 4 && sentinel.length >= 16) {
             resize(sentinel.length / 2);
         }
         return b;
