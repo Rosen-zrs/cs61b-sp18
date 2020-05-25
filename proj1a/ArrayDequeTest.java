@@ -1,9 +1,5 @@
 import org.junit.Test;
-
-import jdk.jfr.Timestamp;
-
 import static org.junit.Assert.*;
-import java.util.Random;
 
 public class ArrayDequeTest{
 
@@ -45,5 +41,5 @@ public class ArrayDequeTest{
         assertEquals(0,example.size());
     }
 
-    
+
 }

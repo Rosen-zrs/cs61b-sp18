@@ -1,12 +1,10 @@
 public class LinkedListDeque<T> {
 
     private class Deque {
-
         public T item;
         public Deque front;
         public Deque next;
-
-        public Deque(T i, Deque f, Deque n) {
+        public Deque(T i,Deque f,Deque n) {
             item = i;
             front = f;
             next = n;
@@ -44,7 +42,7 @@ public class LinkedListDeque<T> {
 
 
     public void addLast(T item) {
-        sentinel.front = new Deque(item, sentinel.front, sentinel);
+        sentinel.front = new Deque(item,sentinel.front,sentinel);
         sentinel.front.front.next = sentinel.front;
         size += 1;
     }
@@ -110,12 +108,12 @@ public class LinkedListDeque<T> {
 
     public T getRecursive(int index) {
         if (size <= index) return null;
-        Deque d = Recursive(sentinel, index);
+        Deque d = Recursive(sentinel,index);
         return d.item;
     }
 
-    private Deque Recursive(Deque d, int index) {
+    private Deque Recursive(Deque d,int index) {
         if (index == 0) return d.next;
-        else return Recursive(d.next, index - 1);
+        else return Recursive(d.next,index - 1);
     }
 }
