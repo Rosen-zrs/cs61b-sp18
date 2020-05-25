@@ -4,7 +4,6 @@ public class ArrayDeque<T>{
     private int front,back;
     private T[] sentinel;
 
-    //构造函数
     public ArrayDeque(){
         sentinel = (T[])new Object[8];
         size = 0;
@@ -12,7 +11,6 @@ public class ArrayDeque<T>{
         back = 0;
     }
 
-    //深层复制构造函数
     public ArrayDeque(ArrayDeque other){
         sentinel = (T[]) new Object[other.length];
         System.arraycopy(sentinel, 0, b, 0, other.length);
@@ -20,7 +18,6 @@ public class ArrayDeque<T>{
         back = other.back;
     }
 
-    //调整双头数组的大小
     private void resize(int x){
         T[] b = (T[]) new Object[x];
         if(front < back){        
@@ -34,7 +31,6 @@ public class ArrayDeque<T>{
         }
     }
 
-    //在双头数组前添加元素
     public void addFirst(T item){
         sentinel[front] = item;
         front = (sentinel.length + front - 1) % sentinel.length;
@@ -44,7 +40,6 @@ public class ArrayDeque<T>{
         }
     }
 
-    //在双头数组后添加元素
     public void addLast(T item){
         sentinel[back] = item;
         back = back + 1;
@@ -53,17 +48,16 @@ public class ArrayDeque<T>{
         }
     }
 
-    //判断双头数组是否为空
     public boolean isEmpty(){
         return (size == 0);
     }
 
-    //返回双头数组的大小
+
     public int size(){
         return size;
     }
 
-    //打印双头队列
+
     public void printDeque(){
         for(int i = 0;i<size;i++){
             System.out.print(sentinel[i] + " ");
@@ -71,7 +65,7 @@ public class ArrayDeque<T>{
         System.out.print('\n');
     }
 
-    //删除双头队列的头数据
+
     public T removeFirst(){
         T b = sentinel[front];
         sentinel[front] = null;
@@ -79,7 +73,7 @@ public class ArrayDeque<T>{
         return b;
     }
 
-    //删除双头队列的尾数据
+
     public T removeLast(){
         T b = sentinel[back];
         sentinel[back] = null;
@@ -87,7 +81,7 @@ public class ArrayDeque<T>{
         return b;
     }
 
-    //根据索引获取双头队列数据
+
     public T get(int index){
         return sentinel[index];
     }
