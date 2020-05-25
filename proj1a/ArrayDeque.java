@@ -26,14 +26,18 @@ public class ArrayDeque<T> {
             sentinel = b;
         }
         else {
-            System.arraycopy(sentinel, front + x/2 , b, front + x/2, sentinel.length - front);
-            System.arraycopy(sentinel, 0, b, 0, back);
+            System.arraycopy(sentinel, front, b, front + x/2, sentinel.length - front);
+            System.arraycopy(sentinel, 0, b, 0, x/2);
+            front += x /2;
             sentinel = b;
         }
     }
 
     public void addFirst(T item) {
-        flag = 1;
+        if (flag == 0) {
+            back = 0;
+            flag = 1;
+        }
         front = (sentinel.length + front - 1) % sentinel.length;
         sentinel[front] = item;
         size += 1;
@@ -45,6 +49,7 @@ public class ArrayDeque<T> {
     public void addLast(T item) {
         if (flag == 0) {
             front = 0;
+            flag = 1;
         }
         back = (sentinel.length + back + 1) % sentinel.length;
         sentinel[back] = item;
@@ -65,7 +70,10 @@ public class ArrayDeque<T> {
 
 
     public void printDeque() {
-        for (int i = 0;i<size;i++) {
+        for (int i = front; i < sentinel.length; i++) {
+            System.out.print(sentinel[i] + " ");
+        }
+        for (int i = 0; i < back + 1; i++) {
             System.out.print(sentinel[i] + " ");
         }
         System.out.print('\n');
@@ -99,5 +107,4 @@ public class ArrayDeque<T> {
     public T get(int index) {
         return sentinel[(front + index) % sentinel.length];
     }
-
 }
