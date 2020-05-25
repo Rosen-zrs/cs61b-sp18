@@ -1,11 +1,11 @@
 public class ArrayDeque<T> {
     private int size;
-    private int front,back;
+    private int front, back;
     private T[] sentinel;
     private int flag = 0;
 
     public ArrayDeque() {
-        sentinel = (T[])new Object[8];
+        sentinel = (T[]) new Object[8];
         size = 0;
         front = 1;
         back = -1;
@@ -26,22 +26,19 @@ public class ArrayDeque<T> {
                 front = 0;
                 back = size - 1;
                 sentinel = b;
-            }
-            else {
+            }else {
                 System.arraycopy(sentinel, front, b, front + x/2, sentinel.length - front);
                 System.arraycopy(sentinel, 0, b, 0, back + 1);
                 front += x /2;
                 sentinel = b;
             }
-        }
-        else {
+        }else {
             if (front < back) {        
                 System.arraycopy(sentinel, front, b, 0, size);
                 front = 0;
                 back = size - 1;
                 sentinel = b;
-            }
-            else {
+            }else {
                 System.arraycopy(sentinel, front, b, front - x, sentinel.length - front);
                 System.arraycopy(sentinel, 0, b, 0, back + 1);
                 front -= x;
@@ -96,8 +93,7 @@ public class ArrayDeque<T> {
             for (int i = 0; i < back + 1; i++) {
                 System.out.print(sentinel[i] + " ");
             }
-        }
-        else {
+        }else {
             for (int i = front; i < back + 1; i++) {
                 System.out.print(sentinel[i] + " ");
             }
@@ -121,12 +117,10 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        if (size == 0){
-            return null;
-        }
+        if (size == 0){return null;}
         T b = sentinel[back];
         sentinel[back] = null;
-        back -= 1;
+        back = (sentinel.length + back - 1) % sentinel.length;
         size -= 1;
         if (size == sentinel.length / 4 && sentinel.length >= 16) {
             resize(sentinel.length / 2);
