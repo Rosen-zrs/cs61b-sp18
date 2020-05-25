@@ -22,7 +22,7 @@ public class ArrayDeque<T> {
     private void resize(int x) {
         T[] b = (T[]) new Object[x];
         if (front < back) {        
-            System.arraycopy(sentinel, 0, b, 0, size);
+            System.arraycopy(sentinel, 0, b, 0, sentinel.length);
             sentinel = b;
         }
         else {
