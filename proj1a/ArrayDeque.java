@@ -3,12 +3,13 @@ public class ArrayDeque<T> {
     private int size;
     private int front,back;
     private T[] sentinel;
+    private int flag = 0;
 
     public ArrayDeque() {
         sentinel = (T[])new Object[8];
         size = 0;
-        front = 0;
-        back = 0;
+        front = 1;
+        back = -1;
     }
 
     public ArrayDeque(ArrayDeque other) {
@@ -32,8 +33,9 @@ public class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
-        sentinel[front] = item;
+        flag = 1;
         front = (sentinel.length + front - 1) % sentinel.length;
+        sentinel[front] = item;
         size += 1;
         if (size == sentinel.length - 3) {
             resize(2 * sentinel.length);
@@ -41,8 +43,11 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
+        if (flag == 0) {
+            front = 0;
+        }
+        back = (sentinel.length + back + 1) % sentinel.length;
         sentinel[back] = item;
-        back += 1;
         size += 1;
         if (size == sentinel.length - 3) {
             resize(2 * sentinel.length);

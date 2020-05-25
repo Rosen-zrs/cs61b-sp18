@@ -72,19 +72,25 @@ public class LinkedListDeque<T> {
 
 
     public T removeFirst() {
-        if (size == 0) return null;
+        if (size == 0) {
+            return null;
+        }
         Deque d = sentinel.next;
         sentinel.next = sentinel.next.next;
         sentinel.next.front = sentinel;
+        size -= 1;
         return d.item;
     }
 
 
     public T removeLast() {
-        if (size == 0) return null;
+        if (size == 0) {
+            return null;
+        }
         Deque d = sentinel.front;
         sentinel.front = sentinel.front.front;
         sentinel.front.next = sentinel;
+        size -= 1;
         return d.item;
     }
 
