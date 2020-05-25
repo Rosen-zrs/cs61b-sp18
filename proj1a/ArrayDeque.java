@@ -69,6 +69,9 @@ public class ArrayDeque<T>{
 
 
     public T removeFirst(){
+        if(size == 0){
+            return null;
+        }
         T b = sentinel[front];
         sentinel[front] = null;
         front += 1;
@@ -78,6 +81,9 @@ public class ArrayDeque<T>{
 
 
     public T removeLast(){
+        if(size == 0){
+            return null;
+        }
         T b = sentinel[back];
         sentinel[back] = null;
         back -= 1;
@@ -87,7 +93,7 @@ public class ArrayDeque<T>{
 
 
     public T get(int index){
-        return sentinel[index];
+        return sentinel[(front + index) % sentinel.length]
     }
 
 }
